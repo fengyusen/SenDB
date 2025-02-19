@@ -1,27 +1,29 @@
-package com.fengyusen.ysdb.backend.tm;
+package com.fengyusen.ysdb.backend.dm.pageCache;
 
-
+import com.fengyusen.ysdb.backend.dm.page.Page;
 import com.fengyusen.ysdb.backend.utils.Panic;
 import com.fengyusen.ysdb.common.Error;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-public interface TransactionManager {
-    long begin();
-    void commit(long xid);
-    void abort(long xid);
-    boolean isActive(long xid);
-    boolean isCommitted(long xid);
-    boolean isAborted(long xid);
-    void close();
+public interface PageCache {
+    
+    public static final int PAGE_SIZE = 1 << 13;
 
-    public static TransactionManagerImpl create(String path) {
-        File f = new File(path+TransactionManagerImpl.XID_SUFFIX);
+    int newPage(byte[] initData);
+    Page getPage(int pgno) throws Exception;
+    void close();
+    void release(Page page);
+
+    void truncateByBgno(int maxPgno);
+    int getPageNumber();
+    void flushPage(Page pg);
+
+    public static PageCacheImpl create(String path, long memory) {
+        File f = new File(path+PageCacheImpl.DB_SUFFIX);
         try {
             if(!f.createNewFile()) {
                 Panic.panic(Error.FileExistsException);
@@ -39,23 +41,13 @@ public interface TransactionManager {
             raf = new RandomAccessFile(f, "rw");
             fc = raf.getChannel();
         } catch (FileNotFoundException e) {
-            Panic.panic(e);
+           Panic.panic(e);
         }
-
-        // 写空XID文件头
-        ByteBuffer buf = ByteBuffer.wrap(new byte[TransactionManagerImpl.LEN_XID_HEADER_LENGTH]);
-        try {
-            fc.position(0);
-            fc.write(buf);
-        } catch (IOException e) {
-            Panic.panic(e);
-        }
-
-        return new TransactionManagerImpl(raf, fc);
+        return new PageCacheImpl(raf, fc, (int)memory/PAGE_SIZE);
     }
 
-    public static TransactionManagerImpl open(String path) {
-        File f = new File(path+TransactionManagerImpl.XID_SUFFIX);
+    public static PageCacheImpl open(String path, long memory) {
+        File f = new File(path+PageCacheImpl.DB_SUFFIX);
         if(!f.exists()) {
             Panic.panic(Error.FileNotExistsException);
         }
@@ -69,9 +61,8 @@ public interface TransactionManager {
             raf = new RandomAccessFile(f, "rw");
             fc = raf.getChannel();
         } catch (FileNotFoundException e) {
-            Panic.panic(e);
+           Panic.panic(e);
         }
-
-        return new TransactionManagerImpl(raf, fc);
+        return new PageCacheImpl(raf, fc, (int)memory/PAGE_SIZE);
     }
 }

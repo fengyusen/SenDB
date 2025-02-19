@@ -1,4 +1,4 @@
-package com.fengyusen.ysdb.backend.util;
+package com.fengyusen.ysdb.backend.utils;
 
 /**
  * 用于处理异常的工具类

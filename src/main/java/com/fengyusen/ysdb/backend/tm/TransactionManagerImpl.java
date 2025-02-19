@@ -1,7 +1,7 @@
 package com.fengyusen.ysdb.backend.tm;
 
-import com.fengyusen.ysdb.backend.util.Panic;
-import com.fengyusen.ysdb.backend.util.Parser;
+import com.fengyusen.ysdb.backend.utils.Panic;
+import com.fengyusen.ysdb.backend.utils.Parser;
 import com.fengyusen.ysdb.common.Error;
 
 import java.io.IOException;

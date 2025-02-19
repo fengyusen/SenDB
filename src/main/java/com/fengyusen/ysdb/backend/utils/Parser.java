@@ -1,4 +1,4 @@
-package com.fengyusen.ysdb.backend.util;
+package com.fengyusen.ysdb.backend.utils;
 
 import com.google.common.primitives.Bytes;
 
