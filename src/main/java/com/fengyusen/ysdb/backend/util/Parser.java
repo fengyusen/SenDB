@@ -5,6 +5,9 @@ import com.google.common.primitives.Bytes;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
+/**
+ * 用于解析byte数组和各种类型转换操作
+ */
 public class Parser {
 
     public static byte[] short2Byte(short value) {
