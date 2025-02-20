@@ -1,10 +1,10 @@
-# YSDB
+# SenDB
 
-YSDB 是一个基于 Java 实现的高效、轻量级数据库系统，其设计灵感来源于 MySQL、PostgreSQL 和 SQLite 等主流数据库。YSDB 旨在提供一个简单易用但功能强大的数据库解决方案，支持多种高级数据库特性，适用于学习、研究和小规模应用场景。
+SenDB 是一个基于 Java 实现的简易、轻量级数据库系统，其部分原理参照自 MySQL、PostgreSQL 等主流数据库。YSDB 旨在提供一个简单易用的数据库解决方案，支持多种高级数据库特性，适用于学习、研究和小规模应用场景。
 
 ## 核心特性
 
-YSDB 实现了以下核心功能，确保数据管理的可靠性和高效性：
+SenDB 实现了以下核心功能，确保数据管理的可靠性和高效性：
 
 - **数据可靠性与恢复机制**：通过日志和检查点技术，确保数据的持久性和故障恢复能力。
 - **并发控制**：
@@ -34,19 +34,19 @@ YSDB 实现了以下核心功能，确保数据管理的可靠性和高效性：
 2. **创建数据库**  
    使用以下命令创建数据库，数据库文件将存储在指定路径（例如 `/tmp/mydb`）：
    ```shell
-   mvn exec:java -Dexec.mainClass="backend.com.fengyusen.ysdb.Launcher" -Dexec.args="-create /tmp/mydb"
+   mvn exec:java -Dexec.mainClass="backend.com.fengyusen.sendb.Launcher" -Dexec.args="-create /tmp/mydb"
    ```
 
 3. **启动数据库服务**  
    启动数据库服务，默认监听本机的 `9999` 端口：
    ```shell
-   mvn exec:java -Dexec.mainClass="backend.com.fengyusen.ysdb.Launcher" -Dexec.args="-open /tmp/mydb"
+   mvn exec:java -Dexec.mainClass="backend.com.fengyusen.sendb.Launcher" -Dexec.args="-open /tmp/mydb"
    ```
 
 4. **启动客户端**  
    在新的终端中启动客户端，连接到数据库服务：
    ```shell
-   mvn exec:java -Dexec.mainClass="client.com.fengyusen.ysdb.Launcher"
+   mvn exec:java -Dexec.mainClass="client.com.fengyusen.sendb.Launcher"
    ```
    客户端将启动一个交互式命令行界面，您可以在此输入类 SQL 语句并查看执行结果。
 
