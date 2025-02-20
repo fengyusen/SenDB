@@ -10,7 +10,7 @@ import java.io.File;
 import java.util.concurrent.CountDownLatch;
 
 public class ExecutorTest {
-    String path = "/tmp/mydb";
+    String path = "/tmp/sendb";
     long mem = (1 << 20) * 64;
 
     byte[] CREATE_TABLE = "create table test_table id int32 (index id)".getBytes();

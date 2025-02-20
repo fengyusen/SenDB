@@ -34,13 +34,13 @@ SenDB 实现了以下核心功能，确保数据管理的可靠性和高效性�
 2. **创建数据库**  
    使用以下命令创建数据库，数据库文件将存储在指定路径（例如 `/tmp/mydb`）：
    ```shell
-   mvn exec:java -Dexec.mainClass="backend.com.fengyusen.sendb.Launcher" -Dexec.args="-create /tmp/mydb"
+   mvn exec:java -Dexec.mainClass="backend.com.fengyusen.sendb.Launcher" -Dexec.args="-create /tmp/sendb"
    ```
 
 3. **启动数据库服务**  
-   启动数据库服务，默认监听本机的 `9999` 端口：
+   启动数据库服务，默认监听本机的 `9627` 端口：
    ```shell
-   mvn exec:java -Dexec.mainClass="backend.com.fengyusen.sendb.Launcher" -Dexec.args="-open /tmp/mydb"
+   mvn exec:java -Dexec.mainClass="backend.com.fengyusen.sendb.Launcher" -Dexec.args="-open /tmp/sendb"
    ```
 
 4. **启动客户端**  
@@ -76,7 +76,7 @@ MYDB 将持续优化和扩展，未来的开发计划包括：
 
 ## 贡献与反馈
 
-欢迎贡献代码、提交问题或提出建议！请通过 [GitHub Issues](https://github.com/your-repo/mydb/issues) 提交反馈。
+欢迎贡献代码、提交问题或提出建议！请通过 [GitHub Issues](https://github.com/fengyusen/SenDB/issues) 提交反馈。
 
 ---
 
